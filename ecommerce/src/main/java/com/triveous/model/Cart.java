@@ -27,11 +27,11 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer cartId;
 	
-	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "cart")
 	@JoinColumn(name = "cartId")
 	private User user;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name="cartId")
 	private List<Product> products = new ArrayList<>();
 	

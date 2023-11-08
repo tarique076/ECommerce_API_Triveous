@@ -1,5 +1,7 @@
 package com.triveous.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,5 @@ public class Product {
 	private Integer availability;
 	
 	@ManyToOne
-	@JoinColumn(name = "categoryId")
 	private Category category;
 }
