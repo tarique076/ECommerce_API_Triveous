@@ -8,4 +8,5 @@ import com.triveous.model.Category;
 @Repository
 public interface CategoryDao extends JpaRepository<Category, Integer>{
 
+	public Category findByCategoryName(String categoryName);
 }
