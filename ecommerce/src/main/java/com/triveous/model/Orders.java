@@ -1,5 +1,7 @@
 package com.triveous.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +28,8 @@ public class Orders {
 	
 	@ManyToOne
 	@JoinColumn(name = "userId")
-	private User user;
+	@JsonIgnore
+	private Users user;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "orderId")
