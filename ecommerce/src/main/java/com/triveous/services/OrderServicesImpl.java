@@ -1,8 +1,10 @@
 package com.triveous.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.triveous.dao.CartDao;
@@ -34,7 +36,7 @@ public class OrderServicesImpl implements OrderServices{
 		}
 		
 		if(user.getCart() == null) {
-			throw new OrdersException("Nothing added to cart.!");
+			throw new OrdersException("Nothing added to cart to place an order.!");
 		}
 		
 		Orders newOrder = new Orders();
@@ -50,14 +52,38 @@ public class OrderServicesImpl implements OrderServices{
 
 	@Override
 	public Orders getOrderById(int orderId, String username) throws OrdersException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Users user = userDao.findByUserName(username);
+
+		if (user == null) {
+			throw new OrdersException("Please login first to check your Cart");
+		}
+		
+		Optional<Orders> orderOpt = orderDao.findById(orderId);
+		
+		if(orderOpt.isEmpty()) {
+			throw new OrdersException("No orders found with order id: " + orderId);
+		}
+		
+		return orderOpt.get();
 	}
 
 	@Override
 	public List<Orders> getOrderHistory(String username) throws OrdersException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Users user = userDao.findByUserName(username);
+
+		if (user == null) {
+			throw new OrdersException("Please login first to check your Cart");
+		}
+		
+		if(user.getOrders().isEmpty()) {
+			throw new OrdersException("No orders placed yet.!");
+		}
+		
+		List<Orders> orders = user.getOrders();
+		
+		return orders;
 	}
 
 }

@@ -32,6 +32,7 @@ public class AppConfig {
 		.requestMatchers(HttpMethod.PUT,"/cart/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.DELETE,"/cart/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.POST,"/orders/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers(HttpMethod.GET,"/orders/**").hasAnyRole("ADMIN","USER")
 		.anyRequest()
 		.authenticated()
 		.and()
